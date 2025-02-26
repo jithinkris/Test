@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .copy-container { display: none; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</head>
+<body>
+    <pre id="code" class="copy-container">
+// Step 1: Create an interface
+interface Service {
+    void request();
+}
+
+// Step 2: Create a RealService class (Actual implementation)
+class RealService implements Service {
+    public void request() {
+        System.out.println("Real Service: Handling request...");
+    }
+}
+
+// Step 3: Create a ProxyService class (Proxy to RealService)
+class ProxyService implements Service {
+    private RealService realService;
+
+    public void request() {
+        if (realService == null) {
+            realService = new RealService(); // Create object only when needed
+        }
+        System.out.println("Proxy: Forwarding request to Real Service");
+        realService.request();
+    }
+}
+
+// Step 4: Client Code
+public class ProxyPatternSimple {
+    public static void main(String[] args) {
+        Service proxy = new ProxyService();
+        proxy.request(); // First time, real service is created
+        System.out.println();
+        proxy.request(); // Second time, real service is reused
+    }
+}
+</pre>
+    
+    <h2>Installing Java and Eclipse</h2>
+    <h3>Java Installation</h3>
+    <ol>
+        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
+        <li>Install the JDK by following the installation wizard.</li>
+        <li>Set up the environment variables:
+            <ul>
+                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
+                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>Eclipse Installation</h3>
+    <ol>
+    <button onclick="copyCode()">Copy Link</button>
+
+        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
+        <li>Extract the downloaded file and run the Eclipse installer.</li>
+        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
+        <li>Open Eclipse and set up a new Java project.</li>
+    </ol>
+</body>
+</html>
