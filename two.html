@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Multi-Threading Code</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .copy-container { display: none; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Java Multi-Threading Program</h2>
+    <button onclick="copyCode()">Copy Code</button>
+    <pre id="code" class="copy-container">
+import java.lang.*;
+import java.io.*;
+
+class ChildThread implements Runnable {
+    Thread t;
+
+    ChildThread(String name) {
+        t = new Thread(this, name);
+        t.start();
+    }
+
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            try {
+                if (t.getName().equals("First Thread")) {
+                    Thread.sleep(1000);
+                    System.out.println(t.getName() + ": Good Morning");
+                } else if (t.getName().equals("Second Thread")) {
+                    Thread.sleep(2000);
+                    System.out.println(t.getName() + ": Hello");
+                } else {
+                    Thread.sleep(3000);
+                    System.out.println(t.getName() + ": Welcome");
+                }
+            } catch (InterruptedException e) {
+                System.out.println(t.getName() + " is interrupted");
+            }
+        }
+    }
+}
+
+class ThreeThreads {
+    public static void main(String args[]) {
+        ChildThread one = new ChildThread("First Thread");
+        ChildThread two = new ChildThread("Second Thread");
+        ChildThread three = new ChildThread("Third Thread");
+    }
+}
+</pre>
+    
+    <h2>Installing Java and Eclipse</h2>
+    <h3>Java Installation</h3>
+    <ol>
+        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
+        <li>Install the JDK by following the installation wizard.</li>
+        <li>Set up the environment variables:
+            <ul>
+                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
+                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>Eclipse Installation</h3>
+    <ol>
+        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
+        <li>Extract the downloaded file and run the Eclipse installer.</li>
+        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
+        <li>Open Eclipse and set up a new Java project.</li>
+    </ol>
+</body>
+</html>
