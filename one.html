@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Calculator Code</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .copy-container { display: none; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Java Calculator Program</h2>
+    <button onclick="copyCode()">Copy Code</button>
+    <pre id="code" class="copy-container">
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculator extends JFrame implements ActionListener {
+    private JTextField display;
+    private String operator = "";
+    private double num1, num2, result;
+    
+    public Calculator() {
+        setTitle("Simple Calculator");
+        setSize(300, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        
+        display = new JTextField();
+        display.setEditable(false);
+        add(display, BorderLayout.NORTH);
+        
+        JPanel panel = new JPanel(new GridLayout(4, 4, 5, 5));
+        String[] buttons = {"7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", "C", "=", "+"};
+        for (String text : buttons) {
+            JButton button = new JButton(text);
+            button.addActionListener(this);
+            panel.add(button);
+        }
+        add(panel, BorderLayout.CENTER);
+        setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if (command.matches("\\d")) {
+            display.setText(display.getText() + command);
+        } else if (command.equals("C")) {
+            display.setText("");
+            num1 = num2 = result = 0;
+            operator = "";
+        } else if (command.equals("=")) {
+            num2 = Double.parseDouble(display.getText());
+            switch (operator) {
+                case "+": result = num1 + num2; break;
+                case "-": result = num1 - num2; break;
+                case "*": result = num1 * num2; break;
+                case "/": result = num1 / num2; break;
+            }
+            display.setText(String.valueOf(result));
+        } else {
+            operator = command;
+            num1 = Double.parseDouble(display.getText());
+            display.setText("");
+        }
+    }
+    
+    public static void main(String[] args) {
+        new Calculator();
+    }
+}</pre>
+    
+    <h2>Installing Java and Eclipse</h2>
+    <h3>Java Installation</h3>
+    <ol>
+        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
+        <li>Install the JDK by following the installation wizard.</li>
+        <li>Set up the environment variables:
+            <ul>
+                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
+                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>Eclipse Installation</h3>
+    <ol>
+        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
+        <li>Extract the downloaded file and run the Eclipse installer.</li>
+        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
+        <li>Open Eclipse and set up a new Java project.</li>
+    </ol>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
