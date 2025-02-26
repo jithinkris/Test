@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .copy-container { display: none; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</head>
+<body>
+    <pre id="code" class="copy-container">
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class FactFrame extends JFrame implements ActionListener {
+    JTextField t1, t2;
+    JButton b0;
+
+    public FactFrame() {
+        setTitle("Factorial Calculator");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(3, 2));
+
+        add(new JLabel("Enter an Integer:"));
+        t1 = new JTextField(10);
+        add(t1);
+
+        add(new JLabel("Factorial Value:"));
+        t2 = new JTextField(10);
+        t2.setEditable(false);
+        add(t2);
+
+        b0 = new JButton("Compute");
+        b0.addActionListener(this);
+        add(b0);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        int n = Integer.parseInt(t1.getText());
+        int f = 1;
+        for (int i = 1; i <= n; i++) {
+            f *= i;
+        }
+        t2.setText(String.valueOf(f));
+    }
+
+    public static void main(String[] args) {
+        FactFrame frame = new FactFrame();
+        frame.setVisible(true);
+    }
+}
+</pre>
+    
+    <h2>Installing Java and Eclipse</h2>
+    <h3>Java Installation</h3>
+    <ol>
+        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
+        <li>Install the JDK by following the installation wizard.</li>
+        <li>Set up the environment variables:
+            <ul>
+                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
+                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3>Eclipse Installation</h3>
+    <ol>
+          <button onclick="copyCode()">Copy Link</button>
+
+        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
+        <li>Extract the downloaded file and run the Eclipse installer.</li>
+        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
+        <li>Open Eclipse and set up a new Java project.</li>
+    </ol>
+</body>
+</html>
