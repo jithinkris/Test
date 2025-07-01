@@ -20,92 +20,56 @@
 </head>
 <body>
     <pre id="code" class="copy-container">
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
-import java.awt.event.*;
-class TrafficLightSimulator extends JFrame implements ItemListener {
-    JLabel lbl1, lbl2;
-    JPanel nPanel, cPanel;
-    CheckboxGroup cbg;
-    public TrafficLightSimulator() {
-        setTitle("Traffic Light Simulator");
-        setSize(600,400);
-        setLayout(new GridLayout(2, 1));
-        nPanel = new JPanel(new FlowLayout());
-        cPanel = new JPanel(new FlowLayout());
-        lbl1 = new JLabel();
-        Font font = new Font("Verdana", Font.BOLD, 70);
-        lbl1.setFont(font); 
-        nPanel.add(lbl1);
-        add(nPanel);
-        Font fontR = new Font("Verdana", Font.BOLD, 20);
-        lbl2 = new JLabel("Select Lights");
-        lbl2.setFont(fontR);
-        cPanel.add(lbl2);
-        cbg = new CheckboxGroup();
-        Checkbox rbn1 = new Checkbox("Red Light", cbg, false);
-        rbn1.setBackground(Color.RED);
-        rbn1.setFont(fontR);
-        cPanel.add(rbn1);
-        rbn1.addItemListener(this);
-        Checkbox rbn2 = new Checkbox("Orange Light", cbg, false);
-        rbn2.setBackground(Color.ORANGE);
-        rbn2.setFont(fontR);
-        cPanel.add(rbn2);
-        rbn2.addItemListener(this);
-        Checkbox rbn3 = new Checkbox("Green Light", cbg, false);
-        rbn3.setBackground(Color.GREEN); 
-        rbn3.setFont(fontR);
-        cPanel.add(rbn3);
-        rbn3.addItemListener(this);
-        add(cPanel);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    public void itemStateChanged(ItemEvent i) {
-        Checkbox chk = cbg.getSelectedCheckbox();
-        String str=chk.getLabel();
-        char choice=str.charAt(0);
-        switch (choice) {
-        case 'R':lbl1.setText("STOP");
-                 lbl1.setForeground(Color.RED);
-                 break;
-        case 'O':lbl1.setText("READY");
-                 lbl1.setForeground(Color.ORANGE);
-                 break;
-        case 'G':lbl1.setText("GO");
-                 lbl1.setForeground(Color.GREEN);
-                 break;
-        }
-    }
-    public static void main(String[] args) {
-        new TrafficLightSimulator();
-    }
-}
-</pre>
+
+        
+
+
+        
+SELECT d.DID, d.DNAME, d.DOB, d.GENDER,ar.ROUTENO, COUNT(*)
+AS Travel_Count
+FROM DRIVER d
+JOIN ASSIGN_ROUTE ar ON d.DID = ar.DID GROUP BY d.DID, ar.ROUTENO
+HAVING COUNT(*) > 3;
+
+
+        
+    CREATE VIEW View_R5_Drivers AS SELECT d.DID, d.DNAME
+FROM DRIVER d
+JOIN ASSIGN_ROUTE ar ON d.DID = ar.DID WHERE ar.ROUTENO = ’R5’;
+
+SELECT * FROM View_R5_Drivers;
+
+
+
+        
+    </pre>
     
     <h2>Installing Java and Eclipse</h2>
     <h3>Java Installation</h3>
-    <ol>
-        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
-        <li>Install the JDK by following the installation wizard.</li>
-        <li>Set up the environment variables:
-            <ul>
-                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
-                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
-            </ul>
-        </li>
-    </ol>
-    
-    <h3>Eclipse Installation</h3>
-    <ol>
-          <button onclick="copyCode()">Copy Link</button>
+<h2>Installing MySQL</h2>
 
-        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
-        <li>Extract the downloaded file and run the Eclipse installer.</li>
-        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
-        <li>Open Eclipse and set up a new Java project.</li>
-    </ol>
+<h3>MySQL Installation</h3>
+<ol>
+    <li>Download the MySQL Installer from the 
+        <a href="https://dev.mysql.com/downloads/installer/" target="_blank">official MySQL website</a>.
+    </li>
+    <li>Run the installer and choose the setup type (Developer Default is recommended).</li>
+    <li>Follow the installation wizard steps to install MySQL Server and other tools.</li>
+    <li>Set a strong root password when prompted during configuration.</li>
+    <li>Start the MySQL Server and complete the configuration process.</li>
+</ol>
+
+<h3>Setting Up MySQL Environment</h3>
+<ol>
+    <li>Ensure that the MySQL service is running after installation.</li>
+    <li>Set up environment variables if needed:
+        <ul>
+            <li><strong>Windows:</strong> Add the MySQL bin folder (e.g., <code>C:\Program Files\MySQL\MySQL Server 8.0\bin</code>) to the PATH variable.</li>
+            <li><strong>Linux/macOS:</strong> Add <code>export PATH=$PATH:/usr/local/mysql/bin</code> to <code>~/.bashrc</code> or <code>~/.zshrc</code>, then run <code>source ~/.bashrc</code>.</li>
+        </ul>
+    </li>
+    <li>Verify installation by running <code>mysql --version</code> in your terminal or command prompt.</li>
+</ol>
+
 </body>
 </html>
