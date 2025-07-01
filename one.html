@@ -21,65 +21,39 @@
 </head>
 <body>
     <pre id="code" class="copy-container">
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
-public class Calculator extends JFrame implements ActionListener {
-    private JTextField display;
-    private String operator = "";
-    private double num1, num2, result;
-    
-    public Calculator() {
-        setTitle("Simple Calculator");
-        setSize(300, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        
-        display = new JTextField();
-        display.setEditable(false);
-        add(display, BorderLayout.NORTH);
-        
-        JPanel panel = new JPanel(new GridLayout(4, 4, 5, 5));
-        String[] buttons = {"7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", "C", "=", "+"};
-        for (String text : buttons) {
-            JButton button = new JButton(text);
-            button.addActionListener(this);
-            panel.add(button);
-        }
-        add(panel, BorderLayout.CENTER);
-        setVisible(true);
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (command.matches("\\d")) {
-            display.setText(display.getText() + command);
-        } else if (command.equals("C")) {
-            display.setText("");
-            num1 = num2 = result = 0;
-            operator = "";
-        } else if (command.equals("=")) {
-            num2 = Double.parseDouble(display.getText());
-            switch (operator) {
-                case "+": result = num1 + num2; break;
-                case "-": result = num1 - num2; break;
-                case "*": result = num1 * num2; break;
-                case "/": result = num1 / num2; break;
-            }
-            display.setText(String.valueOf(result));
-        } else {
-            operator = command;
-            num1 = Double.parseDouble(display.getText());
-            display.setText("");
-        }
-    }
-    
-    public static void main(String[] args) {
-        new Calculator();
-    }
-}</pre>
+        delimiter //
+
+create procedure show_Cust()
+begin
+
+declare c_id int;
+declare c_name varchar(200);
+DECLARE DONE INT default 0;
+
+declare cust_cursor CURSOR FOR SELECT customer_id,customer_name FROM customer_details;
+
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE =1;
+
+OPEN cust_cursor;
+
+read_loop:Loop
+ fetch  cust_cursor into c_id,c_name ;
+ if DONE then
+ leave read_loop;
+ end if;
+ 
+ 
+ select concat('ID : ',c_id,' Name :- ',c_name) as cust_details;
+ 
+ end loop;
+ close cust_cursor;
+ 
+ end //
+ 
+ call show_cust()
+        </pre>
     
     <h2>Installing Java and Eclipse</h2>
     <h3>Java Installation</h3>
