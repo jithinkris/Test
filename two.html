@@ -22,66 +22,53 @@
 <body>
 
     <pre id="code" class="copy-container">
-import java.lang.*;
-import java.io.*;
 
-class ChildThread implements Runnable {
-    Thread t;
+    SELECT d.dept_no FROM dept_details d
+LEFT JOIN emp_details e ON d.dept_no = e.dept_no WHERE e.dept_no IS NULL;
 
-    ChildThread(String name) {
-        t = new Thread(this, name);
-        t.start();
-    }
 
-    public void run() {
-        for (int i = 1; i <= 5; i++) {
-            try {
-                if (t.getName().equals("First Thread")) {
-                    Thread.sleep(1000);
-                    System.out.println(t.getName() + ": Good Morning");
-                } else if (t.getName().equals("Second Thread")) {
-                    Thread.sleep(2000);
-                    System.out.println(t.getName() + ": Hello");
-                } else {
-                    Thread.sleep(3000);
-                    System.out.println(t.getName() + ": Welcome");
-                }
-            } catch (InterruptedException e) {
-                System.out.println(t.getName() + " is interrupted");
-            }
-        }
-    }
-}
+        DELIMITER //
 
-class ThreeThreads {
-    public static void main(String args[]) {
-        ChildThread one = new ChildThread("First Thread");
-        ChildThread two = new ChildThread("Second Thread");
-        ChildThread three = new ChildThread("Third Thread");
-    }
-}
-</pre>
+CREATE FUNCTION update_salary220(s int)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+	BEGIN
+	update employee set salary=200 where id=s;
+    RETURN 0;
+END //
+
+DELIMITER ;
+
+select update_salary220(1)
+    
+    </pre>
     
     <h2>Installing Java and Eclipse</h2>
     <h3>Java Installation</h3>
-    <ol>
-        <li>Download the latest JDK from the <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Oracle website</a> or use OpenJDK.</li>
-        <li>Install the JDK by following the installation wizard.</li>
-        <li>Set up the environment variables:
-            <ul>
-                <li>Windows: Add JAVA_HOME and update the PATH variable.</li>
-                <li>Linux/macOS: Add export JAVA_HOME="/path/to/jdk" in ~/.bashrc or ~/.zshrc.</li>
-            </ul>
-        </li>
-    </ol>
-    
-    <h3>Eclipse Installation</h3>
-    <ol>
-            <button onclick="copyCode()">Copy link</button>
-        <li>Download Eclipse IDE from the <a href="https://www.eclipse.org/downloads/" target="_blank">official website</a>.</li>
-        <li>Extract the downloaded file and run the Eclipse installer.</li>
-        <li>Choose the "Eclipse IDE for Java Developers" option and complete the installation.</li>
-        <li>Open Eclipse and set up a new Java project.</li>
-    </ol>
+  <h2>Installing MySQL</h2>
+
+<h3>MySQL Installation</h3>
+<ol>
+    <li>Download the MySQL Installer from the 
+        <a href="https://dev.mysql.com/downloads/installer/" target="_blank">official MySQL website</a>.
+    </li>
+    <li>Run the installer and choose the setup type (Developer Default is recommended).</li>
+    <li>Follow the installation wizard steps to install MySQL Server and other tools.</li>
+    <li>Set a strong root password when prompted during configuration.</li>
+    <li>Start the MySQL Server and complete the configuration process.</li>
+</ol>
+
+<h3>Setting Up MySQL Environment</h3>
+<ol>
+    <li>Ensure that the MySQL service is running after installation.</li>
+    <li>Set up environment variables if needed:
+        <ul>
+            <li><strong>Windows:</strong> Add the MySQL bin folder (e.g., <code>C:\Program Files\MySQL\MySQL Server 8.0\bin</code>) to the PATH variable.</li>
+            <li><strong>Linux/macOS:</strong> Add <code>export PATH=$PATH:/usr/local/mysql/bin</code> to <code>~/.bashrc</code> or <code>~/.zshrc</code>, then run <code>source ~/.bashrc</code>.</li>
+        </ul>
+    </li>
+    <li>Verify installation by running <code>mysql --version</code> in your terminal or command prompt.</li>
+</ol>
+
 </body>
 </html>
